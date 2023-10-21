@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test PHP su GitHub</title>
+</head>
+<body>
+
+    <h1>Test PHP su GitHub</h1>
+
+    <?php
+    $host = "cornelius.db.elephantsql.com";
+    $database = "zagqivcf";
+    $user = "zagqivcf";
+    $password = "sx9lkNk3ezNKm9fFsl2Koao70CJX0RR-";
+
+    $conn = pg_connect("host=$host dbname=$database user=$user password=$password");
+
+    if (!$conn) {
+        die("Connessione fallita: " . pg_last_error());
+    }
+
+    echo "Connessione riuscita al database";
+
+    pg_close($conn);
+    ?>
+
+</body>
+</html>
