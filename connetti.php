@@ -1,32 +1,20 @@
 <?php
-$servername = "localhost";
-$username = "migo3";
-$password = "";
-$dbname = "my_migo3";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$host = "cornelius.db.elephantsql.com";
+$database = "zagqivcf";
+$user = "zagqivcf";
+$password = "sx9lkNk3ezNKm9fFsl2Koao70CJX0RR-";
 
-if ($conn->connect_error) {
-    die("Connessione fallita: " . $conn->connect_error);
+// Prova a stabilire una connessione
+$conn = pg_connect("host=$host dbname=$database user=$user password=$password");
+
+if (!$conn) {
+    die("Connessione fallita: " . pg_last_error());
 }
 
-$materia = $_GET['materia'];
+echo "Connessione riuscita al database";
 
-$sql = "SELECT nome, cognome, $materia FROM TRACK_Studente";
+// Chiudi la connessione
+pg_close($conn);
 
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $rows = array();
-
-    while ($row = $result->fetch_assoc()) {
-        $rows[] = $row;
-    }
-
-    echo json_encode($rows);
-} else {
-    echo "Nessun risultato";
-}
-
-$conn->close();
 ?>
